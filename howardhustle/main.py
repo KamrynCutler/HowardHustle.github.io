@@ -30,7 +30,16 @@ jinja_environment = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(
 		os.path.dirname(__file__)))
 
-class CompanySignUp(webapp2.RequestHandler):
+class LaunchHandler(webapp2.RequestHandler):
+	def get(self):
+		template = jinja_environment.get_template('launch.html')
+		self.response.write(template.render())
+
+	def post(self):
+		template = jinja_environment.get_template('HowardHustleHorC.html')
+		
+
+class CompanySignUpHandler(webapp2.RequestHandler):
 	 def get(self):
 		template = jinja_environment.get_template('companySignUp.html')
 		self.response.write(template.render())
@@ -43,7 +52,9 @@ class MainHandler(webapp2.RequestHandler):
 
 
 
+
 app = webapp2.WSGIApplication([
 	('/', MainHandler),
-	('/companySignUp', CompanySignUp)
+	('/companySignUp', CompanySignUpHandler),
+	('/launch', LaunchHandler)
 ], debug=True)
