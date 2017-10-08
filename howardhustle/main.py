@@ -30,6 +30,13 @@ jinja_environment = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(
 		os.path.dirname(__file__)))
 
+class HorCHandler(webapp2.RequestHandler):
+	"""docstring for HorCHandler"""
+	def get(self):
+		template = jinja_environment.get_template('HowardHustleHorC.html')
+		self.response.write(template.render())
+		
+
 class LaunchHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('launch.html')
@@ -43,7 +50,6 @@ class CompanySignUpHandler(webapp2.RequestHandler):
 	 def get(self):
 		template = jinja_environment.get_template('companySignUp.html')
 		self.response.write(template.render())
-		
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -56,5 +62,6 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
 	('/', MainHandler),
 	('/companySignUp', CompanySignUpHandler),
-	('/launch', LaunchHandler)
+	('/launch', LaunchHandler),
+	('/HorC', HorCHandler)
 ], debug=True)
